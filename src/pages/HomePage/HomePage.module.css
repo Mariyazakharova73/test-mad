@@ -1,0 +1,13 @@
+.card img {
+	object-fit: cover;
+	object-position: center;
+	height: 500px;
+}
+
+.text {
+	margin-bottom: 20px;
+}
+
+.buttonWrapper {
+	text-align: center;
+}

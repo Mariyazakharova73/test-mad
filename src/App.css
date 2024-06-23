@@ -1,0 +1,21 @@
+.page {
+	margin: 0 auto;
+	min-width: 320px;
+	width: 100%;
+	max-width: 1440px;
+	background-color: var(--page-bg);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.content {
+	margin: var(--interval) auto;
+	padding: var(--interval);
+	border-radius: 10px;
+	width: 80%;
+	background-color: var(--content-bg);
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+	flex: 1;
+}

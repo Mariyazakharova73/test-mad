@@ -1,0 +1,21 @@
+body {
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	--accent: #880d0d;
+	--content-bg: #fff;
+	--page-bg: #f3f5f6;;
+	--footer-bg: #d3d7d7;
+	--header-text: #fff;
+	--interval: 30px;
+}

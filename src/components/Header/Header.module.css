@@ -1,0 +1,10 @@
+.header {
+	padding: var(--interval);
+	background-color: var(--accent);
+	color: var(--header-text);
+}
+
+.header a {
+	color: var(--header-text);
+	text-decoration: none;
+}
