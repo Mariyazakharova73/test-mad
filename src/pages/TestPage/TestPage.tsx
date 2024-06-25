@@ -50,7 +50,7 @@ const TestPage: FC = () => {
 
 	const finishTest = () => {
 		handleTimeUp();
-		// отправляем заполненные данные
+		// отправляем заполненные данные на сервер
 	};
 
 	return (
