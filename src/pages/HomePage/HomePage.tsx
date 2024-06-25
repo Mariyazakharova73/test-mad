@@ -1,7 +1,8 @@
-import { Button, Card, Typography } from 'antd';
+import { Button, Card } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../../assets/bg.jpg';
+import { Routes } from '../../config/routes';
 import s from './HomePage.module.css';
 
 const HomePage: React.FC = () => {
@@ -15,8 +16,8 @@ const HomePage: React.FC = () => {
 				<p>5 вопросов, 10 минут на прохождение</p>
 			</div>
 			<div className={s.buttonWrapper}>
-				<Button type='primary' shape='round' size='large'>
-					<Link to='/test'>Начать тест</Link>
+				<Button type='primary' size='large'>
+					<Link to={Routes.TEST}>Начать тест</Link>
 				</Button>
 			</div>
 		</Card>

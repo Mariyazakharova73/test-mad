@@ -1,14 +1,13 @@
 export const theme = {
+	token: {
+		colorPrimary: '#831111',
+		colorInfo: '#831111',
+	},
 	components: {
-		Button: {
-			colorPrimary: '#880d0d',
-			colorPrimaryHover: '#612121',
-		},
 		Progress: {
 			defaultColor: '#000000',
-			// marginXXS: 10,
-			// marginXS: 12
-			// remainingColor: ''
+			marginXXS: 10,
+			marginXS: 12,
 		},
 	},
 };

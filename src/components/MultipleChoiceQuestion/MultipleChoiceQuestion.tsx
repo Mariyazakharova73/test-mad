@@ -1,41 +1,45 @@
-import { ChangeEvent, FC } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
-import { RootState } from '../../store/store';
+import { Checkbox, Flex } from 'antd';
+import { FormikErrors, FormikTouched } from 'formik';
+import { FC } from 'react';
+import { FormValues, MultipleChoiceQuestionType } from '../../types/types';
+import s from './MultipleChoiceQuestion.module.css';
 
 interface MultipleChoiceQuestionProps {
-	question: any;
-	handleAnswerChange: (answer: string | string[]) => void;
+	question: MultipleChoiceQuestionType;
+	handleAnswerChange: (answer: string[]) => void;
+	errors: FormikErrors<FormValues>;
+	touched: FormikTouched<FormValues>;
+	values: FormValues;
+	handleBlur: (e: React.FocusEvent<HTMLDivElement>) => void;
 }
 
 const MultipleChoiceQuestion: FC<MultipleChoiceQuestionProps> = props => {
-	const { question, handleAnswerChange } = props;
-	const { answers } = useAppSelector((state: RootState) => state.test);
+	const { question, handleAnswerChange, errors, touched, values, handleBlur } =
+		props;
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const option = e.target.value;
-		const currentAnswer = (answers[question.id] as string[]) || [];
-		const newAnswer = currentAnswer.includes(option)
-			? currentAnswer.filter(a => a !== option)
-			: [...currentAnswer, option];
-		handleAnswerChange(newAnswer);
+	const handleChange = (checkedValues: string[]) => {
+		handleAnswerChange(checkedValues);
 	};
 
+	const value = values[question.fieldName];
+	const checkboxValue = Array.isArray(value) ? value : [];
+
 	return (
-		<div>
-			<p>{question.question}</p>
-			{question.options?.map((option: any, index: number) => (
-				<label key={index}>
-					<input
-						type='checkbox'
-						name={`question-${question.id}`}
-						value={option}
-						onChange={handleChange}
-						checked={(answers[question.id] || []).includes(option)}
-					/>
-					{option}
-				</label>
-			))}
-		</div>
+		<Flex vertical gap='small' onBlur={handleBlur}>
+			<Checkbox.Group
+				className={s.container}
+				name={question.fieldName}
+				value={checkboxValue}
+				onChange={handleChange}
+				options={question.options.map((option: string) => ({
+					label: option,
+					value: option,
+				}))}
+			></Checkbox.Group>
+			{errors[question.fieldName] && touched[question.fieldName] && (
+				<div className='error'>{errors[question.fieldName]}</div>
+			)}
+		</Flex>
 	);
 };
 

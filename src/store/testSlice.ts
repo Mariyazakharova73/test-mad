@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Question } from '../types/types';
+import { TEST_DATA_LS } from '../utils/constants';
 
 interface TestState {
 	questions: Question[];
-	answers: { [key: number]: any };
+	answers: { [key: string]: string | string[] };
 	currentQuestionIndex: number;
 }
 
 const loadFromLocalStorage = () => {
 	try {
-		const serializedState = localStorage.getItem('testState');
+		const serializedState = localStorage.getItem(TEST_DATA_LS);
 		return serializedState ? JSON.parse(serializedState) : undefined;
 	} catch (e) {
-		console.error('Could not load state', e);
+		console.error('Не удалось загрузить состояние:', e);
 		return undefined;
 	}
 };
@@ -23,13 +24,12 @@ const initialState: TestState = loadFromLocalStorage() || {
 	currentQuestionIndex: 0,
 };
 
-// Функция для сохранения состояния в localStorage
 const saveStateToLocalStorage = (state: TestState) => {
 	try {
 		const serializedState = JSON.stringify(state);
-		localStorage.setItem('testState', serializedState);
+		localStorage.setItem(TEST_DATA_LS, serializedState);
 	} catch (e) {
-		console.warn('Failed to save state to localStorage:', e);
+		console.warn('Не удалось сохранить состояние в localStorage:', e);
 	}
 };
 
@@ -43,9 +43,9 @@ const testSlice = createSlice({
 		},
 		answerQuestion(
 			state,
-			action: PayloadAction<{ questionId: number; answer: any }>
+			action: PayloadAction<{ name: string; answer: any }>
 		) {
-			state.answers[action.payload.questionId] = action.payload.answer;
+			state.answers[action.payload.name] = action.payload.answer;
 			saveStateToLocalStorage(state);
 		},
 		nextQuestion(state) {
@@ -64,16 +64,6 @@ const testSlice = createSlice({
 			state.currentQuestionIndex = action.payload;
 			saveStateToLocalStorage(state);
 		},
-		// saveProgress(state, action: PayloadAction<{ [key: number]: any }>) {
-		// 	state.answers = { ...state.answers, ...action.payload };
-		// 	localStorage.setItem('testProgress', JSON.stringify(state.answers));
-		// },
-		// loadProgress(state) {
-		// 	const savedProgress = localStorage.getItem('testProgress');
-		// 	if (savedProgress) {
-		// 		state.answers = JSON.parse(savedProgress);
-		// 	}
-		// },
 	},
 });
 

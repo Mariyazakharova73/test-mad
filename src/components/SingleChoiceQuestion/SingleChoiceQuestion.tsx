@@ -1,40 +1,53 @@
-import { ChangeEvent, FC } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
-import { RootState } from '../../store/store';
+import { Checkbox, Flex } from 'antd';
+import { FormikErrors, FormikTouched } from 'formik';
+import { FC } from 'react';
+import { FormValues, SingleChoiceQuestionType } from '../../types/types';
+import s from './SingleChoiceQuestion.module.css'
 
 interface SingleChoiceQuestionProps {
-	question: any;
-	handleAnswerChange: (answer: string | string[]) => void;
+	question: SingleChoiceQuestionType;
+	handleAnswerChange: (answer: string) => void;
+	errors: FormikErrors<FormValues>;
+	touched: FormikTouched<FormValues>;
+	values: FormValues;
+	handleBlur: (e: React.FocusEvent<HTMLDivElement>) => void;
 }
 
 const SingleChoiceQuestion: FC<SingleChoiceQuestionProps> = props => {
-	const { question, handleAnswerChange } = props;
-	const answers = useAppSelector((state: RootState) => state.test.answers);
+	const { question, handleAnswerChange, errors, touched, values, handleBlur } =
+		props;
 
 	if (!question) {
 		return null;
 	}
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		handleAnswerChange(e.target.value);
+	const handleChange = (option: string) => {
+		handleAnswerChange(option);
 	};
 
 	return (
-		<div>
-			<p>{question.question}</p>
-			{question.options?.map((option: any, index: number) => (
-				<label key={index}>
-					<input
-						checked={answers[question.id] === option}
-						type='radio'
-						name={`question-${question.id}`}
-						value={option}
-						onChange={handleChange}
-					/>
+		<Flex
+			vertical
+			gap='small'
+			onBlur={handleBlur}
+		>
+			{question.options?.map((option: string, index: number) => (
+				<Checkbox
+					className={s.checkbox}
+					key={index}
+					name={question.fieldName}
+					value={values[question.fieldName]}
+					onChange={() => handleChange(option)}
+					checked={values[question.fieldName] === option}
+					type='checkbox'
+				>
 					{option}
-				</label>
+				</Checkbox>
 			))}
-		</div>
+			{errors[question.fieldName] && touched[question.fieldName] && (
+				<div className='error'>{errors[question.fieldName]}</div>
+			)}
+		</Flex>
 	);
 };
 

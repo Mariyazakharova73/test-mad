@@ -7,18 +7,17 @@ export enum Routes {
 }
 
 interface RouteConfig {
-  path: Routes;
-  component: React.FC;
+	path: Routes;
+	component: React.FC;
 }
 
 export const routes: RouteConfig[] = [
-  {
-    path: Routes.HOME,
-    component: HomePage,
-  },
-  {
-    path: Routes.TEST,
-    component: TestPage,
-  },
- 
+	{
+		path: Routes.HOME,
+		component: HomePage,
+	},
+	{
+		path: Routes.TEST,
+		component: TestPage,
+	},
 ];

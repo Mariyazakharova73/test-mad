@@ -1,4 +1,4 @@
-export enum QuestionType {
+export enum QuestionVariant {
 	SINGLE = 'single',
 	MULTIPLE = 'multiple',
 	SHORT = 'short',
@@ -7,25 +7,35 @@ export enum QuestionType {
 
 export interface Question {
 	id: number;
-	type: QuestionType;
+	type: QuestionVariant;
 	question: string;
 	options?: string[];
+	fieldName: keyof FormValues;
+	validateMessage?: string;
 }
 
 export interface SingleChoiceQuestionType extends Question {
-	type: QuestionType.SINGLE;
+	type: QuestionVariant.SINGLE;
 	options: string[];
 }
 
 export interface MultipleChoiceQuestionType extends Question {
-	type: QuestionType.MULTIPLE;
+	type: QuestionVariant.MULTIPLE;
 	options: string[];
 }
 
 export interface ShortAnswerQuestionType extends Question {
-	type: QuestionType.SHORT;
+	type: QuestionVariant.SHORT;
 }
 
 export interface LongAnswerQuestionType extends Question {
-	type: QuestionType.LONG;
+	type: QuestionVariant.LONG;
+}
+
+export interface FormValues {
+	username: string;
+	color: string;
+	season: string;
+	checkboxGroup: string[];
+	experience: string;
 }

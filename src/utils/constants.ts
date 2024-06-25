@@ -1,35 +1,49 @@
-import { QuestionType } from '../types/types';
+import { Question, QuestionVariant } from '../types/types';
 
 export const INITIAL_TIME = 600;
 
-export const DATA = [
+export const TEST_DATA_LS = 'testState';
+export const TIMER__LS = 'timer';
+
+export const DATA: Question[] = [
 	{
 		id: 0,
-		type: QuestionType.SHORT,
-		question: 'Как Вас зовут',
+		type: QuestionVariant.SHORT,
+		question: 'Как Вас зовут?',
+		fieldName: 'username',
+		validateMessage: 'Пожалуйста, введите свое имя!',
 	},
 	{
 		id: 1,
-		type: QuestionType.SINGLE,
+		type: QuestionVariant.SINGLE,
 		question: 'Какой Ваш любимый цвет?',
 		options: ['Красный', 'Зеленый', 'Синий'],
+		fieldName: 'color',
+		validateMessage: 'Пожалуйста, выберите вариант ответа!',
 	},
 	{
 		id: 2,
-		type: QuestionType.SINGLE,
+		type: QuestionVariant.SINGLE,
 		question: 'Какое Ваше любимое время года?',
 		options: ['Осень', 'Зима', 'Весна', 'Лето'],
+		fieldName: 'season',
+		validateMessage: 'Пожалуйста, выберите вариант ответа!',
 	},
 	{
 		id: 3,
-		type: QuestionType.MULTIPLE,
+		type: QuestionVariant.MULTIPLE,
 		question: 'Какие фрукты Вы любите?',
 		options: ['Яблоко', 'Банан', 'Апельсин', 'Гранат'],
+		fieldName: 'checkboxGroup',
+		validateMessage:
+			'Пожалуйста, выберите один или несколько вариантов ответа!',
 	},
 
 	{
 		id: 4,
-		type: QuestionType.LONG,
+		type: QuestionVariant.LONG,
 		question: 'Опишите свой самый запоминающийся опыт.',
+		fieldName: 'experience',
+		validateMessage: 'Пожалуйста, заполните поле!',
 	},
 ];

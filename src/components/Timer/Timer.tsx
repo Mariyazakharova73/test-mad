@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { TIMER__LS } from '../../utils/constants';
 import s from './Timer.module.css';
 
 interface TimerProps {
-	initialTime: number; // Время в секундах
-	onTimeUp: () => void; // Функция, вызываемая при истечении времени
+	initialTime: number;
+	onTimeUp: () => void;
 }
 
 const Timer: React.FC<TimerProps> = ({ initialTime, onTimeUp }) => {
 	const [time, setTime] = useState(() => {
-		const savedTime = localStorage.getItem('remainingTime');
+		const savedTime = localStorage.getItem(TIMER__LS);
 		return savedTime ? Number(savedTime) : initialTime;
 	});
 
 	useEffect(() => {
 		if (time === 0) {
 			onTimeUp();
-			localStorage.removeItem('remainingTime');
+			localStorage.removeItem(TIMER__LS);
 			return;
 		}
 
 		const timerId = setInterval(() => {
 			setTime(prevTime => {
 				const newTime = prevTime - 1;
-				localStorage.setItem('remainingTime', newTime.toString());
+				localStorage.setItem(TIMER__LS, newTime.toString());
 				return newTime;
 			});
 		}, 1000);
