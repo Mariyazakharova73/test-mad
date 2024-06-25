@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/test-mad/static/css/main.1e29612a.css",
+    "main.js": "/test-mad/static/js/main.9f947012.js",
+    "static/media/bg.jpg": "/test-mad/static/media/bg.e4c5457af92764f159ff.jpg",
+    "index.html": "/test-mad/index.html",
+    "main.1e29612a.css.map": "/test-mad/static/css/main.1e29612a.css.map",
+    "main.9f947012.js.map": "/test-mad/static/js/main.9f947012.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1e29612a.css",
+    "static/js/main.9f947012.js"
+  ]
+}
